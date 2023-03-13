@@ -6,61 +6,44 @@
 /*   By: Ooksuz <ooksuz@student.42istanbul.com.tr>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/20 22:39:32 by Ooksuz            #+#    #+#             */
-/*   Updated: 2023/02/20 23:30:33 by Ooksuz           ###   ########.fr       */
+/*   Updated: 2023/03/13 10:20:13 by ooksuz           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minitalk.h"
 
-void	get_bits(int sig)
+void	get_bits(int sig, siginfo_t *info, void *con)
 {
-	static char	c = 0;
-	static int	bit = 8;
+	static int	c = 0;
+	static int	bit = 7;
 
-	if (sig == 1)
+	if (sig == SIGUSR1)
 		c += 1 << bit;
 	bit--;
-	if (bit == 0)
+	if (bit == -1)
 	{
 		write(1, &c, 1);
-		bit = 8;
+		bit = 7;
 		c = 0;
 	}
-}
-
-void	move_bit(void)
-{
-	get_bits(0);
-}
-
-void	inc_bit(void)
-{
-	get_bits(1);
-}
-
-void	ft_putnbr(int num)
-{
-	char	c;
-	
-	if (num < 0)
-	{
-		write(1, "-", 1);
-		num = -num;
-	}
-	if (num >= 10)
-		ft_putnbr(num / 10);
-	c = 48 + (num % 10);
-	write(1, &c, 1);
+	(void) info;
+	(void) con;
 }
 
 int	main(void)
 {
+	struct sigaction sig;
+
+	sig.sa_sigaction = get_bits;
+	sig.sa_flags = SA_SIGINFO;
+	sigemptyset(&sig.sa_mask);
 	ft_putnbr(getpid());
 	write(1, "\n", 1);
 	while (1)
 	{
-		signal(SIGUSR1, inc_bit());
-		signal(SIGUSR2, move_bit());
+		sigaction(SIGUSR1, &sig, NULL);
+		sigaction(SIGUSR2, &sig, NULL);
+		pause();
 	}
 }
 

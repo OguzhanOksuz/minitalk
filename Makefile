@@ -6,15 +6,15 @@ SNAME = server
 
 CNAME = client
 
-C_SRCS = client.c
+C_SRCS = 	client.c	\
+		utils.c
 
-S_SRCS = server.c
+S_SRCS =	server.c	\
+		utils.c
 
 all: $(SNAME) $(CNAME)
 
 clean:
-	rm -rf $(SNAME)
-	rm -rf $(CNAME)
 
 
 fclean:
@@ -27,6 +27,6 @@ $(SNAME):
 $(CNAME):
 	$(CC) $(CFLAGS) $(C_SRCS) -o $(CNAME)
 
-re: clean all
+re: fclean all
 
 .PHONY: all clean fclean re
