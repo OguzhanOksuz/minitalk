@@ -6,7 +6,7 @@
 /*   By: Ooksuz <ooksuz@student.42istanbul.com.tr>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/20 22:23:10 by Ooksuz            #+#    #+#             */
-/*   Updated: 2023/03/14 15:33:54 by ooksuz           ###   ########.fr       */
+/*   Updated: 2023/03/14 15:39:21 by ooksuz           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,5 @@ int	main(int ac, char **av)
 	}
 	else
 		write(2, "Invalid args\n", 13);
-	
 	return (0);
 }
