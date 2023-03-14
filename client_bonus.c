@@ -1,16 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   client.c                                           :+:      :+:    :+:   */
+/*   client_bonus.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: Ooksuz <ooksuz@student.42istanbul.com.tr>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/20 22:23:10 by Ooksuz            #+#    #+#             */
-/*   Updated: 2023/03/14 15:07:26 by ooksuz           ###   ########.fr       */
+/*   Updated: 2023/03/14 15:33:54 by ooksuz           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minitalk.h"
+
+void	msg_send(int sig)
+{
+	write(1, "Signal send correctly\n", 22);
+	(void)sig;
+}
 
 int	main(int ac, char **av)
 {
@@ -21,6 +27,7 @@ int	main(int ac, char **av)
 	i = 0;
 	if (ac == 3)
 	{
+		signal(SIGUSR1, msg_send);
 		if (is_pid_correct(av[1]))
 		{
 			pid = ft_atoi(av[1]);
@@ -36,5 +43,6 @@ int	main(int ac, char **av)
 	}
 	else
 		write(2, "Invalid args\n", 13);
+	
 	return (0);
 }
