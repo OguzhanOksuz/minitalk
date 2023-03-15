@@ -6,7 +6,7 @@
 /*   By: ooksuz <ooksuz@student.42istanbul.com.tr>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/13 08:05:17 by ooksuz            #+#    #+#             */
-/*   Updated: 2023/03/14 04:43:39 by ooksuz           ###   ########.fr       */
+/*   Updated: 2023/03/14 17:23:13 by ooksuz           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ void	send_bits(int pid, char c)
 			kill(pid, SIGUSR1);
 		else
 			kill(pid, SIGUSR2);
-		usleep(10);
+		usleep(100);
 		i--;
 	}
 }
