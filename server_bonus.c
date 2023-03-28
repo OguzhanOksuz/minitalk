@@ -6,7 +6,7 @@
 /*   By: Ooksuz <ooksuz@student.42istanbul.com.tr>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/20 22:39:32 by Ooksuz            #+#    #+#             */
-/*   Updated: 2023/03/14 15:35:07 by ooksuz           ###   ########.fr       */
+/*   Updated: 2023/03/28 02:10:23 by ooksuz           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,10 +22,12 @@ void	get_bits_bonus(int sig, siginfo_t *info, void *oldact)
 	bit--;
 	if (bit == -1)
 	{
-		write(1, &c, 1);
+		if (c == 0)
+			kill(info->si_pid, SIGUSR1);
+		else
+			write(1, &c, 1);
 		bit = 7;
 		c = 0;
-		kill(info->si_pid, SIGUSR1);
 	}
 	(void)oldact;
 }

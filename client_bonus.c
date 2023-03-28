@@ -6,7 +6,7 @@
 /*   By: Ooksuz <ooksuz@student.42istanbul.com.tr>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/20 22:23:10 by Ooksuz            #+#    #+#             */
-/*   Updated: 2023/03/14 15:39:21 by ooksuz           ###   ########.fr       */
+/*   Updated: 2023/03/28 02:04:09 by ooksuz           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,7 @@ int	main(int ac, char **av)
 				send_bits(pid, msg[i]);
 				i++;
 			}
+			send_bits(pid, '\0');
 		}
 		else
 			write(2, "Wrong PID\n", 10);
